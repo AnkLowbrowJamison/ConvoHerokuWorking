@@ -12,12 +12,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Add this after your API routes
 app.use(express.static(path.resolve('public')));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve('public', 'index.html'));
-});
 
 app.post('/chat/:guide', async (req, res) => {
   try {
@@ -60,6 +55,10 @@ app.post('/chat/:guide', async (req, res) => {
     console.error(error);
     res.status(500).send(error || 'Something went wrong');
   }
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve('public', 'index.html'));
 });
 
 const port = process.env.PORT || 8080;
