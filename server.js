@@ -2,9 +2,14 @@ import express from 'express';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
 import axios from 'axios';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 import path from 'path';
 
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const openaiApiKey = process.env.OPENAI_API_KEY;
 
