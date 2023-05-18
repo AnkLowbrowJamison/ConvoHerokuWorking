@@ -57,14 +57,14 @@ app.post('/chat/:guide', async (req, res) => {
 });
 
 // Add this after your API routes
-app.use(express.static(path.resolve('public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (_req, res) => {
-  res.sendFile(path.resolve('public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.get('*', (_req, res) => {
-  res.sendFile(path.resolve('public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 const port = process.env.PORT || 8080;
