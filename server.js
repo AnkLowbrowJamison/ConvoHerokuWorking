@@ -12,11 +12,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get('/', async (_req, res) => {
-  res.status(200).send({
-    message:
-      'You are a guide. You will answer in the voice of the selected guide and only use ideas based on that guide. You will limit response to 500 characters, and a question or statement to further the conversation. Include your ideas on how to solve my problem as well. I need some help sorting out what I should do with my life.',
-  });
+// Add this after your API routes
+app.use(express.static(path.resolve('public')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve('public', 'index.html'));
 });
 
 app.post('/chat/:guide', async (req, res) => {
@@ -60,14 +60,6 @@ app.post('/chat/:guide', async (req, res) => {
     console.error(error);
     res.status(500).send(error || 'Something went wrong');
   }
-  console.log("Script loaded");
-});
-
-// Add this after your API routes
-app.use(express.static(path.resolve('public')));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve('public', 'index.html'));
 });
 
 const port = process.env.PORT || 8080;
