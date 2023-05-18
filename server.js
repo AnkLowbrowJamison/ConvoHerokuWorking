@@ -12,8 +12,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use(express.static(path.resolve('public')));
-
 app.post('/chat/:guide', async (req, res) => {
   try {
     const guide = req.params.guide;
@@ -55,9 +53,17 @@ app.post('/chat/:guide', async (req, res) => {
     console.error(error);
     res.status(500).send(error || 'Something went wrong');
   }
+  console.log("Script loaded");
 });
 
-app.get('*', (req, res) => {
+// Add this after your API routes
+app.use(express.static(path.resolve('public')));
+
+app.get('/', (_req, res) => {
+  res.sendFile(path.resolve('public', 'index.html'));
+});
+
+app.get('*', (_req, res) => {
   res.sendFile(path.resolve('public', 'index.html'));
 });
 
