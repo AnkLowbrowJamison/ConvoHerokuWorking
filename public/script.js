@@ -1,8 +1,12 @@
-import bot from './bot.svg'
-import user from './user.svg'
-
 const form = document.querySelector('form')
 const chatContainer = document.querySelector('#chat_container')
+
+const bot = new Image();
+bot.src = '/assets/bot.svg';
+
+const user = new Image();
+user.src = '/assets/user.svg';
+
 
 let loadInterval
 
