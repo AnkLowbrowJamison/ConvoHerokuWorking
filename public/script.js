@@ -1,13 +1,6 @@
 const form = document.querySelector('form')
 const chatContainer = document.querySelector('#chat_container')
 
-const bot = new Image();
-bot.src = '/assets/bot.svg';
-
-const user = new Image();
-user.src = '/assets/user.svg';
-
-
 let loadInterval
 
 function loader(element) {
@@ -49,7 +42,7 @@ function chatStripe(isAi, value, uniqueId) {
         <div class="wrapper ${isAi && 'ai'}">
             <div class="chat">
                 <div class="profile">
-                    <img src=${isAi ? /assets/bot.svg : user} alt="${isAi ? 'bot' : 'user'}" />
+                    <img src=${isAi ? bot : user} alt="${isAi ? 'bot' : 'user'}" />
                 </div>
                 <div class="message" id=${uniqueId}>${value}</div>
             </div>
