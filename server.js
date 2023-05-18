@@ -2,6 +2,7 @@ import express from 'express';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
 import axios from 'axios';
+import path from 'path';
 
 dotenv.config();
 
@@ -60,8 +61,14 @@ app.post('/chat/:guide', async (req, res) => {
     res.status(500).send(error || 'Something went wrong');
   }
   console.log("Script loaded");
-
 });
 
+// Add this after your API routes
+app.use(express.static(path.resolve('public')));
 
-app.listen(8080, () => console.log('AI server started on http://localhost:8080'));
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve('public', 'index.html'));
+});
+
+const port = process.env.PORT || 8080;
+app.listen(port, () => console.log(`AI server started on http://localhost:${port}`));
